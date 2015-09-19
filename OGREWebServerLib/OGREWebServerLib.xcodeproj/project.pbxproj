@@ -24,6 +24,7 @@
 		43AE5B9D1BADAF4900355BD9 /* OGREWebServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.objj; path = OGREWebServer.h; sourceTree = "<group>"; };
 		43AE5B9E1BADAF4900355BD9 /* OGREWebServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGREWebServer.m; sourceTree = "<group>"; };
 		43AE5BA21BADB12400355BD9 /* libfcgi.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfcgi.a; path = ../../../../../../../usr/local/lib/libfcgi.a; sourceTree = "<group>"; };
+		43AE5BEF1BADC47600355BD9 /* com.ogre.server.preferences.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = com.ogre.server.preferences.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +74,7 @@
 		43AE5B931BADA6DB00355BD9 /* Documentation */ = {
 			isa = PBXGroup;
 			children = (
+				43AE5BEF1BADC47600355BD9 /* com.ogre.server.preferences.plist */,
 				43AE5B941BADA70A00355BD9 /* OGRE_Web_Server_Platform.md */,
 			);
 			name = Documentation;
