@@ -42,8 +42,8 @@
         [dict setObject:[NSString stringWithFormat:@"%s", getenv("HTTP_COOKIE")]
                  forKey:@"HTTP_COOKIE"];
         
-        NSString *cookie = [NSString stringWithFormat:@"%s", getenv("HTTP_COOKIE")];
-        NSLog(@"Cookies: %@", cookie);
+        //NSString *cookie = [NSString stringWithFormat:@"%s", getenv("HTTP_COOKIE")];
+        //NSLog(@"Cookies: %@", cookie);
         
         // parse the cookies into something usable.  Cookies are 'key/value/expiration/domain'
         
