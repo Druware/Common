@@ -44,6 +44,8 @@
 - (BOOL)save;
 - (NSXMLElement *)xmlForObject;
 - (BOOL)loadFromXml:(NSXMLElement *)xmlElement;
+- (NSMutableArray *)jsonForObject;
+- (BOOL)loadFromJson:(NSArray *)jsonElement;
 
 
 #pragma mark custom properties
