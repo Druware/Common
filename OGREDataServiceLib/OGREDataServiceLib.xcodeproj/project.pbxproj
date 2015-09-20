@@ -1,0 +1,272 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		43FD90171BAF1860003A7BEF /* OGREDataServiceLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */; };
+		43FD90381BAF18D2003A7BEF /* OGRESession.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90361BAF18D2003A7BEF /* OGRESession.h */; };
+		43FD90391BAF18D2003A7BEF /* OGRESession.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD90371BAF18D2003A7BEF /* OGRESession.m */; };
+		43FD903B1BAF1911003A7BEF /* PGSQLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43FD903A1BAF1911003A7BEF /* PGSQLKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		43FD90131BAF1860003A7BEF /* libOGREDataServiceLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOGREDataServiceLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGREDataServiceLib.h; sourceTree = "<group>"; };
+		43FD90361BAF18D2003A7BEF /* OGRESession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGRESession.h; sourceTree = "<group>"; };
+		43FD90371BAF18D2003A7BEF /* OGRESession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGRESession.m; sourceTree = "<group>"; };
+		43FD903A1BAF1911003A7BEF /* PGSQLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = PGSQLKit.framework; path = /Library/Frameworks/PGSQLKit.framework; sourceTree = "<absolute>"; };
+		43FD903D1BAF1C17003A7BEF /* pgsql-data-schema.sql */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "pgsql-data-schema.sql"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		43FD90101BAF1860003A7BEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43FD903B1BAF1911003A7BEF /* PGSQLKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		43FD900A1BAF1860003A7BEF = {
+			isa = PBXGroup;
+			children = (
+				43FD903D1BAF1C17003A7BEF /* pgsql-data-schema.sql */,
+				43FD90151BAF1860003A7BEF /* OGREDataServiceLib */,
+				43FD903C1BAF1916003A7BEF /* Frameworks */,
+				43FD90141BAF1860003A7BEF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		43FD90141BAF1860003A7BEF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				43FD90131BAF1860003A7BEF /* libOGREDataServiceLib.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		43FD90151BAF1860003A7BEF /* OGREDataServiceLib */ = {
+			isa = PBXGroup;
+			children = (
+				43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */,
+				43FD90361BAF18D2003A7BEF /* OGRESession.h */,
+				43FD90371BAF18D2003A7BEF /* OGRESession.m */,
+			);
+			path = OGREDataServiceLib;
+			sourceTree = "<group>";
+		};
+		43FD903C1BAF1916003A7BEF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				43FD903A1BAF1911003A7BEF /* PGSQLKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		43FD90111BAF1860003A7BEF /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43FD90381BAF18D2003A7BEF /* OGRESession.h in Headers */,
+				43FD90171BAF1860003A7BEF /* OGREDataServiceLib.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		43FD90121BAF1860003A7BEF /* OGREDataServiceLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 43FD90271BAF1860003A7BEF /* Build configuration list for PBXNativeTarget "OGREDataServiceLib" */;
+			buildPhases = (
+				43FD900F1BAF1860003A7BEF /* Sources */,
+				43FD90101BAF1860003A7BEF /* Frameworks */,
+				43FD90111BAF1860003A7BEF /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OGREDataServiceLib;
+			productName = OGREDataServiceLib;
+			productReference = 43FD90131BAF1860003A7BEF /* libOGREDataServiceLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		43FD900B1BAF1860003A7BEF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = O.G.R.E.;
+				TargetAttributes = {
+					43FD90121BAF1860003A7BEF = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 43FD900E1BAF1860003A7BEF /* Build configuration list for PBXProject "OGREDataServiceLib" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 43FD900A1BAF1860003A7BEF;
+			productRefGroup = 43FD90141BAF1860003A7BEF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				43FD90121BAF1860003A7BEF /* OGREDataServiceLib */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		43FD900F1BAF1860003A7BEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				43FD90391BAF18D2003A7BEF /* OGRESession.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		43FD90251BAF1860003A7BEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		43FD90261BAF1860003A7BEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		43FD90281BAF1860003A7BEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		43FD90291BAF1860003A7BEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EXECUTABLE_PREFIX = lib;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/Frameworks",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		43FD900E1BAF1860003A7BEF /* Build configuration list for PBXProject "OGREDataServiceLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43FD90251BAF1860003A7BEF /* Debug */,
+				43FD90261BAF1860003A7BEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		43FD90271BAF1860003A7BEF /* Build configuration list for PBXNativeTarget "OGREDataServiceLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				43FD90281BAF1860003A7BEF /* Debug */,
+				43FD90291BAF1860003A7BEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 43FD900B1BAF1860003A7BEF /* Project object */;
+}
