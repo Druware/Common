@@ -64,6 +64,7 @@
 @property (copy, readonly) NSString *userAgent;
 @property (copy, readonly) NSString *referer;
 @property (copy, readonly) NSString *method;
+@property (copy, readonly) NSString *remoteAddress;
 
 @property (copy, readonly) OGREWebResponse *response;
 

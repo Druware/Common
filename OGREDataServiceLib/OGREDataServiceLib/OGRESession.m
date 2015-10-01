@@ -143,12 +143,6 @@
                          lookupValue:referenceId];
     if (!self) {return nil;}
     
-    if (self.userId.intValue > 0)
-    {
-        //user = [[TWJUser alloc] initWithConnection:connection
-        //                                     forId:userId];
-        //[user retain];
-    }
     return self;
 }
 
@@ -227,11 +221,38 @@
  ******************************************************************************/
 - (BOOL)save
 {
+    NSLog(@"Saved Requested");
     BOOL result = [super save];
     
     // save any child objects that have been altered (as appropriate)
     // category is a related object, but is not going to be altered as a part of
     // an article, so is not considered a 'child' reference.
+    
+    return result;
+}
+
+/* xmlForObject
+ *   description
+ *     retrieve and XMLElement representing the current object, then add the
+ *     child elements to the element in order to get the proper nested data.
+ *     if the child objects have not been loaded, they need to be loaded as a
+ *     part of this process.
+ *   arguments
+ *     none
+ *   returns
+ *     NSXMLElement * representing the XmlElement that contains the description
+ *       of the current objects.
+ *   history
+ *     who   date    change
+ *     --- -------- -----------------------------------------------------------
+ ******************************************************************************/
+- (NSDictionary *)jsonForObject
+{
+    NSDictionary *result = [super jsonForObject];
+    
+    // add the child nodes to the result, in this instance we don't want to
+    // send the full user information, just the selected elements as appropriate
+    // [result addChild:[self.user xmlForObject]];
     
     return result;
 }
@@ -325,37 +346,39 @@
     return [super valueForProperty:@"session_uid"];
 }
 
-/* createdTS
+/* lastAccess
  *   description
- *     get accessor for the createdTS timestamp field.
+ *     get accessor for the last_access timestamp field.
  *   arguments
  *     (none)
  *   returns
- *     NSString representing the createdTS value ( internally: timestamp )
+ *     NSString representing the last_access value ( internally: timestamp )
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSDate *)createdTS
+- (NSDate *)lastAccess
 {
-    return [super valueForProperty:@"created_ts"];
+    return [super valueForProperty:@"last_access"];
 }
 
-/* expiredTS
+/* setLastAccess
  *   description
- *     get accessor for the expiredTS timestamp field.
+ *     set accessor for the last_access timestamp field.
  *   arguments
  *     (none)
  *   returns
- *     NSString representing the expiredTS value ( internally: timestamp )
+ *     NSString representing the last_access value ( internally: timestamp )
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSDate *)expiredTS
+- (void)setLastAccess:(NSDate *)value
 {
-    return [super valueForProperty:@"expired_ts"];
+    [super setValue:value forProperty:@"last_access"];
 }
+
+
 
 /* isExpired
  *   description
@@ -440,17 +463,21 @@
  ******************************************************************************/
 - (BOOL)renew
 {
-    NSDate *now = [[NSDate alloc] init];
-    NSDate *expiredTS = [now dateByAddingTimeInterval:(60 * 30)]; // time interval in seconds.  60s * 30m
+    NSDate *tempLastAccess = [[NSDate alloc] init];
     
-    if ([expiredTS compare:lastAccess] == NSOrderedDescending)
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *components = [calendar components:NSCalendarUnitMinute
+                                               fromDate:self.lastAccess
+                                                 toDate:tempLastAccess
+                                                options:0];
+    if (components.minute < 30)
     {
-        NSLog(@"Cannot Renew an Expired Session");
-        return NO;
+        [super setValue:tempLastAccess forProperty:@"last_access"];
+        return [self save];
     }
     
-    [self setValue:now forProperty:@"last_access"];
-    return [self save];
+    self.lastError = @"Session has expired.";
+    return NO;
 }
 
 /* purgeExpireds

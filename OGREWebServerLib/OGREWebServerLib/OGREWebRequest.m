@@ -10,7 +10,8 @@
 
 @implementation OGREWebRequest
 
-@synthesize parameters, host, userAgent, referer, method, response, form, queryString;
+@synthesize parameters, host, userAgent, referer, method, response, form, queryString,
+    remoteAddress;
 @dynamic server;
 
 - (BOOL)addEnvironmentVariable:(const char *)name toDictionary:(NSMutableDictionary *)dict
@@ -40,6 +41,7 @@
         userAgent = [[NSString alloc] initWithFormat:@"%s", getenv("HTTP_USER_AGENT")];
         referer = [[NSString alloc] initWithFormat:@"%s", getenv("HTTP_REFERER")];
         method = [[NSString alloc] initWithFormat:@"%s", getenv("REQUEST_METHOD")];
+        remoteAddress = [[NSString alloc] initWithFormat:@"%s", getenv("REMOTE_ADDR")];
         form = nil;
         queryString = nil;
         

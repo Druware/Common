@@ -44,15 +44,14 @@
 - (BOOL)save;
 - (NSXMLElement *)xmlForObject;
 - (BOOL)loadFromXml:(NSXMLElement *)xmlElement;
-- (NSMutableArray *)jsonForObject;
+- (NSDictionary *)jsonForObject;
 - (BOOL)loadFromJson:(NSArray *)jsonElement;
-
 
 #pragma mark custom properties
 
 @property (copy,readonly)   NSNumber    *sessionId;
 @property (copy,readonly)   NSString    *sessionUid;
-@property (copy,readonly)   NSDate      *lastAccess;
+@property (copy)            NSDate      *lastAccess;
 @property (copy,readonly)   NSString    *deviceId;
 @property (assign,readonly) BOOL         isPersistant;
 @property (copy,readonly)   NSNumber    *userId;
@@ -64,6 +63,7 @@
 - (NSNumber *)sessionId;
 - (NSString *)sessionUid;
 - (NSDate *)lastAccess;
+- (void)setLastAccess:(NSDate *)value;
 - (NSString *)deviceId;
 - (BOOL)isPersistant;
 - (NSNumber *)userId;
