@@ -22,11 +22,11 @@
 #import <PGSQLKit/PGSQLKit.h>
 #import <PGSQLKit/PGSQLDataObject.h>
 #import <PGSQLKit/PGSQLRecordset.h>
-// #import "TWJUser.h"
+#import "OGREUser.h"
 
 @interface OGRESession : PGSQLDataObject
 {
-    // TWJUser *user;
+    OGREUser *user;
 }
 
 #pragma mark customer initializers
@@ -56,7 +56,7 @@
 @property (assign,readonly) BOOL         isPersistant;
 @property (copy,readonly)   NSNumber    *userId;
 
-// @property (copy, readonly)  TWJUser     *user;
+@property (copy, readonly)  OGREUser    *user;
 
 #pragma mark custom accessors / property overrides
 
@@ -68,7 +68,7 @@
 - (BOOL)isPersistant;
 - (NSNumber *)userId;
 
-// - (TWJUser *)user;
+- (OGREUser *)user;
 
 #pragma mark custom methods and implmentation
 

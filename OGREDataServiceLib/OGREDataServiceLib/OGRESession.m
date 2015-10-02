@@ -248,11 +248,12 @@
  ******************************************************************************/
 - (NSDictionary *)jsonForObject
 {
-    NSDictionary *result = [super jsonForObject];
+    NSMutableDictionary *result = [[NSMutableDictionary alloc] initWithDictionary:[super jsonForObject]];
     
     // add the child nodes to the result, in this instance we don't want to
     // send the full user information, just the selected elements as appropriate
-    // [result addChild:[self.user xmlForObject]];
+    if (userId.integerValue > 0)
+        [result setObject:[self.user jsonForObject] forKey:@"web.user"];
     
     return result;
 }
@@ -445,26 +446,23 @@
  *   arguments
  *     (none)
  *   returns
- *     TWJUser representing the user object
+ *     OGREUser representing the user object
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-/*
-- (TWJUser *)user
+- (OGREUser *)user
 {
     if (!user)
     {
         if (userId)
         {
-            user = [[TWJUser alloc] initWithConnection:connection
-                                                 forId:userId];
-            [user retain];
+            user = [[OGREUser alloc] initWithConnection:connection
+                                                  forId:userId];
         }
     }
     return user;
 }
-*/
 
 #pragma mark custom methods and implmentation
 
