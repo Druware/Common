@@ -7,7 +7,5 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface OGREDataServiceLib : NSObject
-
-@end
+#import "OGRESession.h"
+#import "OGREUser.h"

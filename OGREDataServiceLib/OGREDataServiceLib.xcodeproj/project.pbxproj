@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		43117B191BBF107D00DF65C8 /* OGREUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 43117B171BBF107D00DF65C8 /* OGREUser.h */; settings = {ASSET_TAGS = (); }; };
+		43117B1A1BBF107D00DF65C8 /* OGREUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 43117B181BBF107D00DF65C8 /* OGREUser.m */; settings = {ASSET_TAGS = (); }; };
 		43FD90171BAF1860003A7BEF /* OGREDataServiceLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */; };
 		43FD90381BAF18D2003A7BEF /* OGRESession.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90361BAF18D2003A7BEF /* OGRESession.h */; };
 		43FD90391BAF18D2003A7BEF /* OGRESession.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD90371BAF18D2003A7BEF /* OGRESession.m */; };
@@ -14,6 +16,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		43117B171BBF107D00DF65C8 /* OGREUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGREUser.h; sourceTree = "<group>"; };
+		43117B181BBF107D00DF65C8 /* OGREUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OGREUser.m; sourceTree = "<group>"; };
 		43FD90131BAF1860003A7BEF /* libOGREDataServiceLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libOGREDataServiceLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OGREDataServiceLib.h; sourceTree = "<group>"; };
 		43FD90361BAF18D2003A7BEF /* OGRESession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OGRESession.h; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 			isa = PBXGroup;
 			children = (
 				43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */,
+				43117B171BBF107D00DF65C8 /* OGREUser.h */,
+				43117B181BBF107D00DF65C8 /* OGREUser.m */,
 				43FD90361BAF18D2003A7BEF /* OGRESession.h */,
 				43FD90371BAF18D2003A7BEF /* OGRESession.m */,
 			);
@@ -77,6 +83,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43117B191BBF107D00DF65C8 /* OGREUser.h in Headers */,
 				43FD90381BAF18D2003A7BEF /* OGRESession.h in Headers */,
 				43FD90171BAF1860003A7BEF /* OGREDataServiceLib.h in Headers */,
 			);
@@ -139,6 +146,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43FD90391BAF18D2003A7BEF /* OGRESession.m in Sources */,
+				43117B1A1BBF107D00DF65C8 /* OGREUser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +273,7 @@
 				43FD90291BAF1860003A7BEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

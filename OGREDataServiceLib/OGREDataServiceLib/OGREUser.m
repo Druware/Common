@@ -1,4 +1,4 @@
- /*          file: OGRESession.h
+/*          file: OGREUser.m
  *   description: Implements a Database interface for generation and interaction
  *                with the sessions on the server.
  *
@@ -19,14 +19,14 @@
  *
  ******************************************************************************/
 
-#import "OGRESession.h"
-#import <CoreFoundation/CFUUID.h>
+#import "OGREUser.h"
 
-@implementation OGRESession
+@implementation OGREUser
 
 #pragma mark property implementations;
 
-@synthesize sessionId, sessionUid, lastAccess, isPersistant, deviceId, userId; // , user;
+@synthesize userId, login, passwordHash, accountValidated, contactId;
+// @synthesize contact;
 
 #pragma mark custom initializers
 
@@ -47,37 +47,11 @@
 - (id)initWithConnection:(PGSQLConnection *)pgConn
 {
     self = [super initWithConnection:pgConn
-                            forTable:@"web.\"session\""
-                      withPrimaryKey:@"session_id"];
+                            forTable:@"web.user"
+                      withPrimaryKey:@"user_id"];
     if (!self) {return nil;}
-    
-    CFUUIDRef       _UUID;
-    CFUUIDBytes     myUUIDBytes;
-    CFStringRef     myUUIDString;
-    char            strBuffer[42];
-    NSString 	   *myGUIDString;
-    
-    _UUID = CFUUIDCreate(kCFAllocatorDefault);
-    
-    myUUIDString = CFUUIDCreateString(kCFAllocatorDefault, _UUID);
-    myUUIDBytes = CFUUIDGetUUIDBytes(_UUID);
-    
-    // This is the safest way to obtain a C string from a CFString.
-    CFStringGetCString(myUUIDString, strBuffer, 42, kCFStringEncodingASCII);
-    myGUIDString = [[NSString alloc] initWithFormat:@"%s",strBuffer];
-    [super setValue:myGUIDString forProperty:@"session_uid"];
-    
-    // set the dates
-    NSDate *tempLastAccess = [[NSDate alloc] init];
-    
-    [super setValue:tempLastAccess forProperty:@"last_access"];
-    [super setValue:@"NO" forProperty:@"is_persistant"];
-    
-    if (![self save])
-    {
-        NSLog(@"Error: %@", [self lastError]);
-        [super setValue:nil forProperty:@"session_id"];
-    }
+
+    // set any needed defaults
     
     return self;
 }
@@ -102,12 +76,12 @@
 - (id)initWithConnection:(PGSQLConnection *)pgConn forId:(NSNumber *)referenceId
 {
     self = [super initWithConnection:pgConn
-                            forTable:@"web.\"session\""
-                      withPrimaryKey:@"session_id"
+                            forTable:@"web.user"
+                      withPrimaryKey:@"user_id"
                                forId:referenceId];
     if (!self) {return nil;}
     
-    if (self.userId.intValue > 0)
+    if (self.contactId.intValue > 0)
     {
         //user = [[TWJUser alloc] initWithConnection:connection
         //                                     forId:userId];
@@ -134,14 +108,19 @@
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (id)initWithConnection:(PGSQLConnection *)pgConn forUid:(NSString *)referenceId
+- (id)initWithConnection:(PGSQLConnection *)pgConn
+                forLogin:(NSString *)forLogin
+                withHash:(NSString *)hash;
 {
     self = [super initWithConnection:pgConn
-                            forTable:@"web.\"session\""
-                      withPrimaryKey:@"session_id"
-                           lookupKey:@"session_uid"
-                         lookupValue:referenceId];
+                            forTable:@"web.user"
+                      withPrimaryKey:@"user_id"
+                           lookupKey:@"login"
+                         lookupValue:forLogin];
     if (!self) {return nil;}
+    
+    // compare the stored hash to the provided hash. if they match, validate
+    // the user and
     
     return self;
 }
@@ -167,8 +146,8 @@
                forRecord:(PGSQLRecordset *)rs
 {
     self = [super initWithConnection:pgConn
-                            forTable:@"web.\"session\""
-                      withPrimaryKey:@"session_id"
+                            forTable:@"web.user"
+                      withPrimaryKey:@"user_id"
                            forRecord:rs];
     if (!self) {return nil;}
     
@@ -195,13 +174,13 @@
  ******************************************************************************/
 - (void)dealloc
 {
-/*
- if (user != nil)
-    {
-        [user release];
-        user = nil;
-    }
- */
+    /*
+     if (user != nil)
+     {
+     [user release];
+     user = nil;
+     }
+     */
 }
 
 #pragma mark persistance methods (rdbms, xml)
@@ -221,7 +200,6 @@
  ******************************************************************************/
 - (BOOL)save
 {
-    NSLog(@"Saved Requested");
     BOOL result = [super save];
     
     // save any child objects that have been altered (as appropriate)
@@ -307,26 +285,26 @@
 
 #pragma mark custom accessors / property overrides
 
-/* sessionId
+/* userId
  *   description
- *     get accessor for the sessionId field, this is also the primary key. it
+ *     get accessor for the userId field, this is also the primary key. it
  *     is a bigserial int8 value in the database and as such will be
  *     automatically assigned.
  *     *** THIS IS A READ ONLY FIELD ***
  *   arguments
  *     (none)
  *   returns
- *     NSNumber representing the session_id value ( internally: long / bigint )
+ *     NSNumber representing the user_id value ( internally: long / bigint )
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSNumber *)sessionId
+- (NSNumber *)userId
 {
-    return [super valueForProperty:@"session_id"];
+    return [super valueForProperty:@"user_id"];
 }
 
-/* sessionUid
+/* login
  *   description
  *     get accessor for the sessionUid field, this is also the public/exposed
  *     key. as far as the outside world is concerned this guuid is the session
@@ -341,83 +319,96 @@
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSString *)sessionUid
+- (NSString *)login
 {
-    return [super valueForProperty:@"session_uid"];
+    return [super valueForProperty:@"login"];
 }
 
-/* lastAccess
+/* setLogin
  *   description
- *     get accessor for the last_access timestamp field.
+ *     set accessor for the login timestamp field.
  *   arguments
  *     (none)
  *   returns
- *     NSString representing the last_access value ( internally: timestamp )
+ *     NSString representing the login value ( internally: varchar(255) )
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSDate *)lastAccess
+- (void)setLogin:(NSString *)value
 {
-    return [super valueForProperty:@"last_access"];
+    // do some heavy lifting here.
+    
+    // 1. is the login in use? duplicates are not allowed
+    // 2. the login cannot be set unless this is a new object.
+    
+    [super setValue:value forProperty:@"login"];
+}
+
+/* passwordHash
+ *   description
+ *     get accessor for the passwordHash field, *   arguments
+ *     (none)
+ *   returns
+ *     NSString representing the passwordHash value ( internally: varchar(255) )
+ *   history
+ *     who   date    change
+ *     --- -------- -----------------------------------------------------------
+ ******************************************************************************/
+- (NSString *)passwordHash
+{
+    return [super valueForProperty:@"passwordHash"];
+}
+
+/* setPasswordHash
+ *   description
+ *     set accessor for the passwordHash field. For security reasons, we never 
+ *     even send the password to the server, only the hash, which we compare at
+ *     the server side.
+ *   arguments
+ *     (none)
+ *   returns
+ *     NSString representing the passwordHash value ( internally: varchar(255) )
+ *   history
+ *     who   date    change
+ *     --- -------- -----------------------------------------------------------
+ ******************************************************************************/
+- (void)setPasswordHash:(NSString *)value
+{
+    [super setValue:value forProperty:@"passwordHash"];
+}
+
+/* accountValidated
+ *   description
+ *     get accessor for the account_validated timestamp field.
+ *   arguments
+ *     (none)
+ *   returns
+ *     NSString representing the account_validated value ( internally: timestamp )
+ *   history
+ *     who   date    change
+ *     --- -------- -----------------------------------------------------------
+ ******************************************************************************/
+- (NSDate *)accountValidated
+{
+    return [super valueForProperty:@"account_validated"];
 }
 
 /* setLastAccess
  *   description
- *     set accessor for the last_access timestamp field.
+ *     set accessor for the account_validated timestamp field.
  *   arguments
  *     (none)
  *   returns
- *     NSString representing the last_access value ( internally: timestamp )
+ *     NSString representing the account_validated value ( internally: timestamp )
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (void)setLastAccess:(NSDate *)value
+- (void)setAccountValidated:(NSDate *)value
 {
-    [super setValue:value forProperty:@"last_access"];
+    [super setValue:value forProperty:@"account_validated"];
 }
-
-/* deviceId
- *   description
- *     get accessor for the device_id field.
- *   arguments
- *     (none)
- *   returns
- *     NSString representing the device_id value ( internally: string )
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-- (NSString *)deviceId
-{
-    return [super valueForProperty:@"device_id"];
-}
-
-/* setDeviceId
- *   description
- *     set accessor for the device_id  field.
- *   arguments
- *     NSString representing the device_id value ( internally: varchar(255) )
- *   returns
- *     (none)
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-- (void)setDeviceID:(NSString *)value
-{
-    [super setValue:value forProperty:@"device_id"];
-}
-
-
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-/******************************************************************************/
-
-
 
 /* userId
  *   description
@@ -431,195 +422,41 @@
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
-- (NSNumber *)userId
+- (NSNumber *)contactId
 {
-    return [super valueForProperty:@"user_id"];
+    return [super valueForProperty:@"contact_id"];
 }
 
-// contactId & contact child objects
 
-/* user
+/* contact
  *   description
- *     get accessor for the user child object ( referenced from the
+ *     get accessor for the contact child object ( referenced from the
  *     user_id field )
  *   arguments
  *     (none)
  *   returns
- *     TWJUser representing the user object
+ *     OGREUser representing the user object
  *   history
  *     who   date    change
  *     --- -------- -----------------------------------------------------------
  ******************************************************************************/
 /*
-- (TWJUser *)user
-{
-    if (!user)
-    {
-        if (userId)
-        {
-            user = [[TWJUser alloc] initWithConnection:connection
-                                                 forId:userId];
-            [user retain];
-        }
-    }
-    return user;
-}
-*/
+ - (OGREUser *)user
+ {
+     if (!user)
+     {
+         if (userId)
+         {
+             user = [[OGREUser alloc] initWithConnection:connection
+                                                   forId:userId];
+             [user retain];
+         }
+     }
+     return user;
+ }
+ */
 
 #pragma mark custom methods and implmentation
 
-/* renew
- *   description
- *     renews the current session extending it by 30 minutes from the current
- *     time at the database level.  for consistancy sake, this will also save
- *     immediately.
- *   arguments
- *     (none)
- *   returns
- *     BOOL as the result of the renew command, yes indicates the renew was
- *     successful
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-- (BOOL)renew
-{
-    NSDate *tempLastAccess = [[NSDate alloc] init];
-    
-    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
-    NSDateComponents *components = [calendar components:NSCalendarUnitMinute
-                                               fromDate:self.lastAccess
-                                                 toDate:tempLastAccess
-                                                options:0];
-    if (components.minute < 30)
-    {
-        [super setValue:tempLastAccess forProperty:@"last_access"];
-        return [self save];
-    }
-    
-    self.lastError = @"Session has expired.";
-    return NO;
-}
-
-/* purgeExpireds
- *   description
- *     prunes all expired sessions from the database, as they should have been
- *     logged at both expiration and creation.  This call does log WHO ran the
- *     purge and when.
- *   arguments
- *     ( none )
- *   returns
- *     BOOL as the result of the purge command, no records to purge will be
- *     treated as a failure (NO)
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-/*
- - (BOOL)purgeExpireds
-{
-    if (self.user == nil) // eventually this should ALSO set
-    {
-        NSLog(@"Cannot Purge without permissions");
-        return NO;
-    }
-    
-    NSMutableString *cmd = [[NSMutableString alloc] init];
-    [cmd appendString:@"delete from t_session where is_expired = true"];
-    if ([connection execCommand:cmd] == 0)
-    {
-        NSLog(@"SQL Error: %@", [connection lastError]);
-        [cmd release];
-        return NO;
-    }
-    [cmd release];
-    return YES;
-}
-*/
-
-/* expireSessions
- *   description
- *     sets the isExpired flag on all records where the expired timestamp has
- *     passed.
- *   arguments
- *     (none)
- *   returns
- *     BOOL with YES representing a successful expire.
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-/*
- - (BOOL)expireSessions
-{
-    // perform an update
-    if (self.user == nil)
-    {
-        NSLog(@"Cannot expire without permissions");
-        return NO;
-    }
-    NSDate *now = [[NSDate alloc] init];
-    NSDateFormatter *format = [[[NSDateFormatter alloc] init] autorelease];
-    [format setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
-    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    
-    NSMutableString *cmd = [[NSMutableString alloc] init];
-    [cmd appendFormat:@"update t_session set is_expired = true where expires_ts < '%@'",
-     [format stringFromDate:now]];
-    if ([connection execCommand:cmd] == 0)
-    {
-        
-        NSLog(@"SQL Error: %@", [connection lastError]);
-        [cmd release];
-        return NO;
-    }
-    [cmd release];
-    return YES;
-}
-*/
-
-/* validateUser
- *   description
- *     using a passed in login and password, find a valid user to assign to the
- *     session.  Fail this validation is the user is already assigned and valid.
- *
- *   arguments
- *     (none)
- *   returns
- *
- *   history
- *     who   date    change
- *     --- -------- -----------------------------------------------------------
- ******************************************************************************/
-- (BOOL)validateUser:(NSString *)checkLogin withPassword:(NSString *)checkPassword
-{
-    BOOL isValid = NO;
-    /*
-    // TODO: rework this to use a PostgreSQL User instead of the half ass t_user
-    
-    NSString *cmd = [NSString stringWithFormat:@"select * from t_user where login = %@ and password = %@",
-                     [self stringForString:checkLogin],
-                     [self stringForString:checkPassword]];
-    // NSLog(@"SQL: %@", cmd);
-    
-    PGSQLRecordset *rs = (PGSQLRecordset *)[connection open:cmd];
-    if (![rs isEOF])
-    {
-        // NSLog(@"Dictionary %@", [rs dictionaryFromRecord]);
-        user = [[TWJUser alloc] initWithConnection:connection forRecord:rs];
-        [super setValue:[user userId] forProperty:@"user_id"];
-        isValid = YES;
-        
-        [self renew];
-    }
-    [rs close];
-     */
-    
-    return isValid;
-}
-
 
 @end
-
-
-
