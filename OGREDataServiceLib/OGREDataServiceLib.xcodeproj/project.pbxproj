@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		43117B191BBF107D00DF65C8 /* OGREUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 43117B171BBF107D00DF65C8 /* OGREUser.h */; settings = {ASSET_TAGS = (); }; };
-		43117B1A1BBF107D00DF65C8 /* OGREUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 43117B181BBF107D00DF65C8 /* OGREUser.m */; settings = {ASSET_TAGS = (); }; };
+		43117B191BBF107D00DF65C8 /* OGREUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 43117B171BBF107D00DF65C8 /* OGREUser.h */; };
+		43117B1A1BBF107D00DF65C8 /* OGREUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 43117B181BBF107D00DF65C8 /* OGREUser.m */; };
 		43FD90171BAF1860003A7BEF /* OGREDataServiceLib.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90161BAF1860003A7BEF /* OGREDataServiceLib.h */; };
 		43FD90381BAF18D2003A7BEF /* OGRESession.h in Headers */ = {isa = PBXBuildFile; fileRef = 43FD90361BAF18D2003A7BEF /* OGRESession.h */; };
 		43FD90391BAF18D2003A7BEF /* OGRESession.m in Sources */ = {isa = PBXBuildFile; fileRef = 43FD90371BAF18D2003A7BEF /* OGRESession.m */; };
@@ -115,7 +115,7 @@
 		43FD900B1BAF1860003A7BEF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0640;
+				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = O.G.R.E.;
 				TargetAttributes = {
 					43FD90121BAF1860003A7BEF = {
@@ -173,6 +173,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -233,6 +234,7 @@
 		43FD90281BAF1860003A7BEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -245,6 +247,7 @@
 		43FD90291BAF1860003A7BEF /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
 				EXECUTABLE_PREFIX = lib;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
