@@ -8,8 +8,7 @@
 
 import Foundation
 
-class WebServer {
-    var httpAccept : String?;
+public class Server {
     var httpAcceptLanguage : String?
     var httpHost : String?;
     var httpConnection : String?;
@@ -19,13 +18,6 @@ class WebServer {
     var remoteAddress : String?;
     var remotePort : String?;
     
-    var serverName : String?;
-    var serverProtocol : String?;
-    var serverAddress : String?;
-    var serverPort : String?;
-    var serverSoftware : String?;
-    var serverAdmin : String?;
-    var serverSignature : String?;
     
     var path : String?;
     var pathInfo : String?;
@@ -44,13 +36,11 @@ class WebServer {
     var gatewayInterface : String?;
     
     var scriptFilename : String?;
-    var scriptName : String?;
-    var requestUri : String?;
     
     var cookies : Dictionary<String, String?>;
     var environment : Dictionary<String, String?>;
     
-    init() {
+    public init() {
         cookies = Dictionary<String, String?>();
         environment = Dictionary<String, String?>();
         for (keyName, _) in NSProcessInfo().environment {
@@ -60,27 +50,13 @@ class WebServer {
         }
         
         // http
-        self.httpAccept = NSProcessInfo().environment["HTTP_ACCEPT"];
+
         self.httpAcceptLanguage = NSProcessInfo().environment["HTTP_ACCEPT_LANGUAGE"];
         self.httpHost = NSProcessInfo().environment["HTTP_HOST"];
         self.httpConnection = NSProcessInfo().environment["HTTP_CONNECTION"];
         self.httpAcceptEncoding = NSProcessInfo().environment["HTTP_ACCEPT_ENCODING"];
         self.httpUserAgent = NSProcessInfo().environment["HTTP_USER_AGENT"];
-        
-        // request
-        
-        // server
-        
-        self.serverName = NSProcessInfo().environment["SERVER_NAME"];
-        self.serverProtocol = NSProcessInfo().environment["SERVER_PROTOCOL"];
-        self.serverAddress = NSProcessInfo().environment["SERVER_ADDR"];
-        self.serverName = NSProcessInfo().environment["SERVER_NAME"];
-        self.serverProtocol = NSProcessInfo().environment["SERVER_PROTOCOL"];
-        self.serverPort = NSProcessInfo().environment["SERVER_PORT"];
-        self.serverSoftware = NSProcessInfo().environment["SERVER_SOFTWARE"];
-        self.serverAdmin = NSProcessInfo().environment["SERVER_ADMIN"];
-        self.serverSignature = NSProcessInfo().environment["SERVER_SIGNATURE"];
-        
+    
         // other
         self.remoteAddress = NSProcessInfo().environment["REMOTE_ADDR"];
         self.remotePort = NSProcessInfo().environment["REMOTE_PORT"];
@@ -88,8 +64,6 @@ class WebServer {
         self.path = NSProcessInfo().environment["PATH"];
         self.pathInfo = NSProcessInfo().environment["PATH_INFO"];
         self.pathTranslated = NSProcessInfo().environment["PATH_TRANSLATED"];
-        
-        self.scriptName = NSProcessInfo().environment["SCRIPT_NAME"];
         
         self.documentRoot = NSProcessInfo().environment["DOCUMENT_ROOT"];
         
@@ -99,7 +73,6 @@ class WebServer {
         self.scriptFilename = NSProcessInfo().environment["SCRIPT_FILENAME"];
         
         self.requestMethod = NSProcessInfo().environment["REQUEST_METHOD GET"];
-        self.requestUri = NSProcessInfo().environment["REQUEST_URI"];
         self.requestScheme = NSProcessInfo().environment["REQUEST_SCHEME"];
         
         self.queryString = NSProcessInfo().environment["QUERY_STRING"];
@@ -117,16 +90,82 @@ class WebServer {
         HTTP_X_FORWARDED_HOST localhost
         */
     }
-}
-
-class WebRequest {
     
-}
-
-class WebResponse {
+    // Server Properties
     
-}
-
-class Cookie {
+    public var serverName : String? {
+        get {
+            if (environment["SERVER_NAME"] == nil) {return nil};
+            return environment["SERVER_NAME"]!;
+        }
+    }
     
+    public var serverProtocol : String? {
+        get {
+            return environment["SERVER_PROTOCOL"]!;
+        }
+    }
+    
+    public var serverAddress : String? {
+        get {
+            return environment["SERVER_ADDR"]!;
+        }
+    }
+    
+    public var serverPort : String? {
+        get {
+            return environment["SERVER_PORT"]!;
+        }
+    }
+    
+    public var serverSoftware : String? {
+        get {
+            return environment["SERVER_SOFTWARE"]!;
+        }
+    }
+    
+    public var serverAdmin : String? {
+        get {
+            return environment["SERVER_ADMIN"]!;
+        }
+    }
+    
+    public var serverSignature : String? {
+        get {
+            return environment["SERVER_SIGNATURE"]!;
+        }
+    }
+    
+    // Script Information
+    
+    public var scriptName : String? {
+        get {
+            return environment["SCRIPT_NAME"]!;
+        }
+    }
+    
+    public var requestUri : String? {
+        get {
+            return environment["REQUEST_URI"]!;
+        }
+    }
+    
+    // General Server Tidbits
+    
+    public var httpAccept: String? {
+        get {
+            return environment["HTTP_ACCEPT"]!;
+        }
+    }
+    
+    // Utility Bits
+    
+    public func allVariables() -> Dictionary<String, String?> {
+        return environment;
+    }
+    
+    public func variable(name: String) -> String? {
+        
+        return nil;
+    }
 }
