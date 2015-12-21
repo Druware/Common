@@ -7,19 +7,65 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4309F7B01C2851960011959B /* CGIScript.h in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7AF1C2851960011959B /* CGIScript.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4309F7B81C2874FE0011959B /* CGIServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7B71C2874FE0011959B /* CGIServer.swift */; };
+		4309F7B81C2874FE0011959B /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7B71C2874FE0011959B /* Server.swift */; };
+		4309F7C31C2876170011959B /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7C21C2876170011959B /* main.swift */; };
+		4309F7CD1C287C9C0011959B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7CC1C287C9C0011959B /* Request.swift */; };
+		4309F7CF1C287CAB0011959B /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7CE1C287CAB0011959B /* Response.swift */; };
+		4309F7D11C287CB70011959B /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7D01C287CB70011959B /* Cookie.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		4309F7C81C2876C30011959B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4309F7A31C2851960011959B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4309F7AB1C2851960011959B;
+			remoteInfo = CGIScript;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4309F7BE1C2876170011959B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = "/Library/Server/Web/Data/CGI-Executables";
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4309F7D31C287DBC0011959B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /Library/Frameworks;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4309F7AC1C2851960011959B /* CGIScript.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CGIScript.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4309F7AF1C2851960011959B /* CGIScript.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.objj; path = CGIScript.h; sourceTree = "<group>"; };
 		4309F7B11C2851960011959B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4309F7B71C2874FE0011959B /* CGIServer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGIServer.swift; sourceTree = "<group>"; };
+		4309F7B71C2874FE0011959B /* Server.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Server.swift; sourceTree = "<group>"; };
+		4309F7C01C2876170011959B /* showEnvironment */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = showEnvironment; sourceTree = BUILT_PRODUCTS_DIR; };
+		4309F7C21C2876170011959B /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		4309F7CC1C287C9C0011959B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
+		4309F7CE1C287CAB0011959B /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
+		4309F7D01C287CB70011959B /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		4309F7A81C2851960011959B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4309F7BD1C2876170011959B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -32,6 +78,7 @@
 		4309F7A21C2851960011959B = {
 			isa = PBXGroup;
 			children = (
+				4309F7BB1C2875E90011959B /* Examples */,
 				4309F7AE1C2851960011959B /* CGIScript */,
 				4309F7AD1C2851960011959B /* Products */,
 			);
@@ -41,6 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				4309F7AC1C2851960011959B /* CGIScript.framework */,
+				4309F7C01C2876170011959B /* showEnvironment */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -50,9 +98,28 @@
 			children = (
 				4309F7AF1C2851960011959B /* CGIScript.h */,
 				4309F7B11C2851960011959B /* Info.plist */,
-				4309F7B71C2874FE0011959B /* CGIServer.swift */,
+				4309F7B71C2874FE0011959B /* Server.swift */,
+				4309F7CC1C287C9C0011959B /* Request.swift */,
+				4309F7CE1C287CAB0011959B /* Response.swift */,
+				4309F7D01C287CB70011959B /* Cookie.swift */,
 			);
 			path = CGIScript;
+			sourceTree = "<group>";
+		};
+		4309F7BB1C2875E90011959B /* Examples */ = {
+			isa = PBXGroup;
+			children = (
+				4309F7C11C2876170011959B /* showEnvironment */,
+			);
+			name = Examples;
+			sourceTree = "<group>";
+		};
+		4309F7C11C2876170011959B /* showEnvironment */ = {
+			isa = PBXGroup;
+			children = (
+				4309F7C21C2876170011959B /* main.swift */,
+			);
+			path = showEnvironment;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -86,16 +153,39 @@
 			productReference = 4309F7AC1C2851960011959B /* CGIScript.framework */;
 			productType = "com.apple.product-type.framework";
 		};
+		4309F7BF1C2876170011959B /* showEnvironment */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4309F7C41C2876170011959B /* Build configuration list for PBXNativeTarget "showEnvironment" */;
+			buildPhases = (
+				4309F7BC1C2876170011959B /* Sources */,
+				4309F7BD1C2876170011959B /* Frameworks */,
+				4309F7D31C287DBC0011959B /* CopyFiles */,
+				4309F7BE1C2876170011959B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4309F7C91C2876C30011959B /* PBXTargetDependency */,
+			);
+			name = showEnvironment;
+			productName = showEnvironment;
+			productReference = 4309F7C01C2876170011959B /* showEnvironment */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		4309F7A31C2851960011959B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0720;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Druware Software Designs";
 				TargetAttributes = {
 					4309F7AB1C2851960011959B = {
+						CreatedOnToolsVersion = 7.2;
+					};
+					4309F7BF1C2876170011959B = {
 						CreatedOnToolsVersion = 7.2;
 					};
 				};
@@ -113,6 +203,7 @@
 			projectRoot = "";
 			targets = (
 				4309F7AB1C2851960011959B /* CGIScript */,
+				4309F7BF1C2876170011959B /* showEnvironment */,
 			);
 		};
 /* End PBXProject section */
@@ -132,12 +223,30 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4309F7B81C2874FE0011959B /* CGIServer.swift in Sources */,
-				4309F7B01C2851960011959B /* CGIScript.h in Sources */,
+				4309F7CF1C287CAB0011959B /* Response.swift in Sources */,
+				4309F7CD1C287C9C0011959B /* Request.swift in Sources */,
+				4309F7D11C287CB70011959B /* Cookie.swift in Sources */,
+				4309F7B81C2874FE0011959B /* Server.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4309F7BC1C2876170011959B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4309F7C31C2876170011959B /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		4309F7C91C2876C30011959B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4309F7AB1C2851960011959B /* CGIScript */;
+			targetProxy = 4309F7C81C2876C30011959B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		4309F7B21C2851960011959B /* Debug */ = {
@@ -234,6 +343,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = CGIScript/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -252,6 +362,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = CGIScript/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -259,6 +370,22 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.druware.oss.CGIScript;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		4309F7C51C2876170011959B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		4309F7C61C2876170011959B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
 		};
@@ -279,6 +406,15 @@
 			buildConfigurations = (
 				4309F7B51C2851960011959B /* Debug */,
 				4309F7B61C2851960011959B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4309F7C41C2876170011959B /* Build configuration list for PBXNativeTarget "showEnvironment" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4309F7C51C2876170011959B /* Debug */,
+				4309F7C61C2876170011959B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
