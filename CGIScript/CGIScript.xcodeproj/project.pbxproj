@@ -12,6 +12,9 @@
 		4309F7CD1C287C9C0011959B /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7CC1C287C9C0011959B /* Request.swift */; };
 		4309F7CF1C287CAB0011959B /* Response.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7CE1C287CAB0011959B /* Response.swift */; };
 		4309F7D11C287CB70011959B /* Cookie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4309F7D01C287CB70011959B /* Cookie.swift */; };
+		436FF2D51C28F32700953288 /* CGIScript.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7AC1C2851960011959B /* CGIScript.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		436FF2D61C28F3EB00953288 /* CGIScript.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7AC1C2851960011959B /* CGIScript.framework */; };
+		436FF2D71C28F3F000953288 /* showEnvironment in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7C01C2876170011959B /* showEnvironment */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,6 +34,7 @@
 			dstPath = "/Library/Server/Web/Data/CGI-Executables";
 			dstSubfolderSpec = 0;
 			files = (
+				436FF2D71C28F3F000953288 /* showEnvironment in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +44,17 @@
 			dstPath = /Library/Frameworks;
 			dstSubfolderSpec = 0;
 			files = (
+				436FF2D61C28F3EB00953288 /* CGIScript.framework in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		436FF2D41C28F31C00953288 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /Library/Frameworks;
+			dstSubfolderSpec = 0;
+			files = (
+				436FF2D51C28F32700953288 /* CGIScript.framework in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -55,6 +70,7 @@
 		4309F7CC1C287C9C0011959B /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		4309F7CE1C287CAB0011959B /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		4309F7D01C287CB70011959B /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
+		436FF2D81C28FDE000953288 /* CGI Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "CGI Playground.playground"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,7 @@
 		4309F7A21C2851960011959B = {
 			isa = PBXGroup;
 			children = (
+				436FF2D81C28FDE000953288 /* CGI Playground.playground */,
 				4309F7BB1C2875E90011959B /* Examples */,
 				4309F7AE1C2851960011959B /* CGIScript */,
 				4309F7AD1C2851960011959B /* Products */,
@@ -143,6 +160,7 @@
 				4309F7A81C2851960011959B /* Frameworks */,
 				4309F7A91C2851960011959B /* Headers */,
 				4309F7AA1C2851960011959B /* Resources */,
+				436FF2D41C28F31C00953288 /* CopyFiles */,
 			);
 			buildRules = (
 			);
