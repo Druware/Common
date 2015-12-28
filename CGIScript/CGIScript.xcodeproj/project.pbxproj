@@ -15,6 +15,7 @@
 		436FF2D51C28F32700953288 /* CGIScript.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7AC1C2851960011959B /* CGIScript.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		436FF2D61C28F3EB00953288 /* CGIScript.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7AC1C2851960011959B /* CGIScript.framework */; };
 		436FF2D71C28F3F000953288 /* showEnvironment in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4309F7C01C2876170011959B /* showEnvironment */; };
+		43D9458F1C30E23B00C6B37B /* RESTfulEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D9458D1C30E16D00C6B37B /* RESTfulEnvironment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		4309F7CE1C287CAB0011959B /* Response.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Response.swift; sourceTree = "<group>"; };
 		4309F7D01C287CB70011959B /* Cookie.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cookie.swift; sourceTree = "<group>"; };
 		436FF2D81C28FDE000953288 /* CGI Playground.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; path = "CGI Playground.playground"; sourceTree = "<group>"; };
+		43D9458D1C30E16D00C6B37B /* RESTfulEnvironment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTfulEnvironment.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				4309F7C21C2876170011959B /* main.swift */,
+				43D9458D1C30E16D00C6B37B /* RESTfulEnvironment.swift */,
 			);
 			path = showEnvironment;
 			sourceTree = "<group>";
@@ -252,6 +255,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43D9458F1C30E23B00C6B37B /* RESTfulEnvironment.swift in Sources */,
 				4309F7C31C2876170011959B /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

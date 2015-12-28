@@ -56,6 +56,7 @@ public class Server {
         self.httpConnection = NSProcessInfo().environment["HTTP_CONNECTION"];
         self.httpAcceptEncoding = NSProcessInfo().environment["HTTP_ACCEPT_ENCODING"];
         self.httpUserAgent = NSProcessInfo().environment["HTTP_USER_AGENT"];
+
     
         // other
         self.remoteAddress = NSProcessInfo().environment["REMOTE_ADDR"];
@@ -154,6 +155,7 @@ public class Server {
     
     public var httpAccept: String? {
         get {
+            if (environment["HTTP_ACCEPT"] == nil) {return nil};
             return environment["HTTP_ACCEPT"]!;
         }
     }
@@ -165,7 +167,6 @@ public class Server {
     }
     
     public func variable(name: String) -> String? {
-        
-        return nil;
+        return environment[name]!;
     }
 }
