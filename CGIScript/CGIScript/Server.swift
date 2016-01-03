@@ -73,7 +73,7 @@ public class Server {
         
         self.scriptFilename = NSProcessInfo().environment["SCRIPT_FILENAME"];
         
-        self.requestMethod = NSProcessInfo().environment["REQUEST_METHOD GET"];
+        self.requestMethod = NSProcessInfo().environment["REQUEST_METHOD"];
         self.requestScheme = NSProcessInfo().environment["REQUEST_SCHEME"];
         
         self.queryString = NSProcessInfo().environment["QUERY_STRING"];
@@ -141,13 +141,15 @@ public class Server {
     
     public var scriptName : String? {
         get {
-            return environment["SCRIPT_NAME"]!;
+            return self.variable("SCRIPT_NAME")!;
         }
     }
     
     public var requestUri : String? {
         get {
-            return environment["REQUEST_URI"]!;
+            let result : String? = self.variable("REQUEST_URI");
+            if (result == "") { return nil; }
+            return result!;
         }
     }
     
@@ -167,6 +169,10 @@ public class Server {
     }
     
     public func variable(name: String) -> String? {
-        return environment[name]!;
+        if (environment.keys.contains(name)) {
+            let result : String? = environment[name]!;
+            return result;
+        }
+        return "";
     }
 }

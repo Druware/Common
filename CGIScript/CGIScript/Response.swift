@@ -11,8 +11,8 @@ import Foundation
 public class Response {
     var _contentType : String;		// rw
     var contentLength : Int32;      // rw
-    var headers : [String];          // ro
-    var content : String?;			// rw
+    var headers : [String]?;          // ro
+    var _content : String?;			// rw
     var rawData : [UInt8]?;			// rw
     
     
@@ -20,32 +20,38 @@ public class Response {
         // setup the members
         _contentType = "text/xml";
         contentLength = 0;
-        headers = [];
-        content = "";
+        headers = nil;
+        _content = nil;
         rawData = nil;
     }
   
     public func write() {
+        print("");
+        print("");
         print("Content-type: \(_contentType)");
         if (rawData != nil) {
             print("Content-length: \(rawData!.count)");
-        } else {
-            print ("Content-length: \(content?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))");
+        } else if (_content != nil) {
+            print ("Content-length: \(_content!.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))");
         }
+        print("");
+        print("");
+        print("debug (headers): \(headers)");
+        print("debug (content): \(_content)");
+        print("");
         // handle any extra headers we might have
-        for (var i : Int = 0; i < headers.count; i++)
-        {
-            print("\(headers[i])\r");
+        if (headers != nil) {
+            for (var i : Int = 0; i < headers!.count; i++) {
+                print("\(headers![i])\r");
+            }
         }
-        
+        // end of the headers
         print("");
         
-        print("test");
-        /*
-
+        // print the content
         if (rawData != nil)
         {
-            unsigned char buff;
+/*            unsigned char buff;
             int i;
             for (i = 0; i < [rawData length]; i++)
             {
@@ -53,13 +59,12 @@ public class Response {
                 [rawData getBytes:&buff range:readRange];
                 printf("%c", buff);
             }
-        } else {
-            printf("%s", [content cStringUsingEncoding:NSUTF8StringEncoding]);
-        }
-        
 */
+        } else if (_content != nil) {
+            print("\(_content!)");
+        }
     }
-    
+
     public func redirect(url : String) {
         print("HTTP/1.1 303 See Other");
         print("Location: \(url.cStringUsingEncoding(NSUTF8StringEncoding))");
@@ -71,10 +76,11 @@ public class Response {
             print("Content-length: \(contentLength)");
         }
         
-        // additional headers if they exist.
-        for (var i : Int = 0; i < headers.count; i++)
-        {
-            print("\(headers[i])");
+        // additional headers if they exist
+        if (headers != nil) {
+            for (var i : Int = 0; i < headers!.count; i++) {
+                print("\(headers![i])");
+            }
         }
         
         // move to the content
@@ -91,8 +97,8 @@ public class Response {
                 print("%c", buff);
             }
 */
-        } else if (content != nil) {
-            print("\(content!.cStringUsingEncoding(NSUTF8StringEncoding))");
+        } else if (_content != nil) {
+            print("\(_content!.cStringUsingEncoding(NSUTF8StringEncoding))");
         }
     }
     
@@ -102,6 +108,18 @@ public class Response {
         }
         set(value) {
             _contentType = value;
+        }
+    }
+    
+    public var content : String {
+        get {
+            if (_content == nil) {
+                _content = String();
+            }
+            return _content!;
+        }
+        set(value) {
+            _content = value;
         }
     }
     

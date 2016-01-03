@@ -16,6 +16,8 @@ public class Request {
     var _queryString : Dictionary<String, String>?;
     var _form : Dictionary<String, String>?;
     
+    var _content : String?;
+    
     //var data : NSData?; // or maybe [UInt8] instead ?
     
     public init(server : Server? = nil) {
@@ -29,8 +31,12 @@ public class Request {
         _response = Response();
         _form = nil;
         _queryString = nil;
+        _content = nil;
+        
+        print("");
         
         // parse the query string into it's elements
+        
         let qs : String? = _server.variable("QUERY_STRING");
         if (qs! != "") {
             _queryString = Dictionary<String, String>();
@@ -45,10 +51,26 @@ public class Request {
                 }
             }
         }
-
-        // parameters = nil;
-        let paramString : String = (_server.requestUri?.componentsSeparatedByString("&")[0].componentsSeparatedByString(_server.scriptName!)[1])!;
-        _parameters = paramString.componentsSeparatedByString("/");
+        
+        _parameters = nil;
+        if (_server.requestUri != nil) {
+            var paramString : String = (_server.requestUri?.componentsSeparatedByString(_server.scriptName!)[1])!;
+            print("debug: \(paramString)");
+            if (paramString != "") {
+                var result : Bool = paramString.containsString("/");
+                if (result == true) {
+                    paramString = paramString.substringFromIndex((paramString.rangeOfString("/")?.endIndex)!);
+                    print("debug: \(paramString)");
+                }
+                result = paramString.containsString("?");
+                if (result == true) {
+                    paramString = paramString.componentsSeparatedByString("?")[0];
+                    print("debug: \(paramString)");
+                }
+                _parameters = paramString.componentsSeparatedByString("/");
+            }
+        }
+        print("debug: \(_parameters)");
         
         // form = nil;
         if (_server.requestMethod == "POST") {
